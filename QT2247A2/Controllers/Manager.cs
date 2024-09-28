@@ -62,13 +62,13 @@ namespace QT2247A2.Controllers
         // “get all” method sorted in ascending order by track Name.
         public IEnumerable<TrackWithDetailViewModel> TrackGetAll()
         {
-            return mapper.Map<IEnumerable<Track>, IEnumerable<TrackWithDetailViewModel>>(ds.Tracks.OrderBy(t => t.Name));
+            return mapper.Map<IEnumerable<Track>, IEnumerable<TrackWithDetailViewModel>>(ds.Tracks.Include("Album").Include("Genre").OrderBy(t => t.Name));
         }
 
         // Filter where GenreId is 2 or 6 and sort in ascending order by genre Name then by track Name.
         public IEnumerable<TrackWithDetailViewModel> TrackGetBluesJazz()
         {
-            var tracks = ds.Tracks.Include("Genre").Where(t => t.GenreId == 2 || t.GenreId == 6).OrderBy(t => t.Genre.Name).ThenBy(t=>t.Name);
+            var tracks = ds.Tracks.Include("Album").Include("Genre").Where(t => t.GenreId == 2 || t.GenreId == 6).OrderBy(t => t.Genre.Name).ThenBy(t=>t.Name);
 
             return mapper.Map<IEnumerable<Track>, IEnumerable<TrackWithDetailViewModel>>(tracks);
         }
@@ -76,7 +76,7 @@ namespace QT2247A2.Controllers
         // Filter where the Composer contains the string “Jerry Cantrell” and contains the string “Layne Staley”. Sort the tracks in ascending order by Composer then by track Name.
         public IEnumerable<TrackWithDetailViewModel> TrackGetCantrellStaley()
         {
-            var tracks=ds.Tracks.Where(t=>t.Composer.Contains("Jerry Cantrell") && t.Composer.Contains("Layne Staley")).OrderBy(t=>t.Composer).ThenBy(t=>t.Name);
+            var tracks=ds.Tracks.Include("Album").Include("Genre").Where(t=>t.Composer.Contains("Jerry Cantrell") && t.Composer.Contains("Layne Staley")).OrderBy(t=>t.Composer).ThenBy(t=>t.Name);
 
             return mapper.Map<IEnumerable<Track>, IEnumerable<TrackWithDetailViewModel>>(tracks);
         }
@@ -84,7 +84,7 @@ namespace QT2247A2.Controllers
         // Display the 50 longest tracks based on the Milliseconds property. Sort the tracks in ascending order by track Name.
         public IEnumerable<TrackWithDetailViewModel> TrackGetTop50Longest()
         {
-            var tracks=ds.Tracks.OrderByDescending(t=>t.Milliseconds).ThenBy(t=>t.Name).Take(50);
+            var tracks=ds.Tracks.Include("Album").Include("Genre").OrderByDescending(t=>t.Milliseconds).ThenBy(t=>t.Name).Take(50);
 
             return mapper.Map<IEnumerable<Track>, IEnumerable<TrackWithDetailViewModel>>(tracks);
         }
@@ -92,7 +92,7 @@ namespace QT2247A2.Controllers
         // Display the 50 smallest tracks based on the Bytes property. Sort the tracks in ascending order by track Name.
         public IEnumerable<TrackWithDetailViewModel> TrackGetTop50Smallest()
         {
-            var tracks = ds.Tracks.OrderBy(t => t.Bytes).ThenBy(t => t.Name).Take(50);
+            var tracks = ds.Tracks.Include("Album").Include("Genre").OrderBy(t => t.Bytes).ThenBy(t => t.Name).Take(50);
 
             return mapper.Map<IEnumerable<Track>, IEnumerable<TrackWithDetailViewModel>>(tracks);
         }

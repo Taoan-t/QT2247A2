@@ -7,6 +7,12 @@
 @{ string actionName = ViewContext.RouteData.GetRequiredString("action"); string title = "All Tracks";
     switch (actionName)
     {
+        case "BluesJazz":
+            title = "Blues & Jazz Tracks"; break;
+        case "CantrellStaley":
+            title = "Cantrell & Staley Tracks"; break;
+        case "Top50Longest":
+            title = "Longest Tracks"; break;
         case "Top50Smallest":
             title = "Smallest Tracks"; break;
     }
@@ -16,10 +22,10 @@
 <h2>@title</h2>
 
 <p>
-    @Html.ActionLink("All Tracks", "Index")
-    @Html.ActionLink("Blues & Jazz Tracks", "BluesJazz")
-    @Html.ActionLink("Cantrell & Staley Tracks", "CantrellStaley")
-    @Html.ActionLink("Longest Tracks", "Top50Longest")
+    @Html.ActionLink("All Tracks", "Index") |
+    @Html.ActionLink("Blues & Jazz Tracks", "BluesJazz") |
+    @Html.ActionLink("Cantrell & Staley Tracks", "CantrellStaley") |
+    @Html.ActionLink("Longest Tracks", "Top50Longest") |
     @Html.ActionLink("Smallest Tracks", "Top50Smallest")
 </p>
 <table class="table">
@@ -72,11 +78,11 @@
             <td>
                 @Html.DisplayFor(modelItem => item.GenreName)
             </td>
-            <td>
+            @*<td>
                 @Html.ActionLink("Edit", "Edit", new { id = item.TrackId }) |
                 @Html.ActionLink("Details", "Details", new { id = item.TrackId }) |
                 @Html.ActionLink("Delete", "Delete", new { id = item.TrackId })
-            </td>
+            </td>*@
         </tr>
     }
 
