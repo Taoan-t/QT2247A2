@@ -1,62 +1,48 @@
-using System;
+﻿using System;
 using System.Collections.Generic;
-using System.ComponentModel.DataAnnotations;
 using System.ComponentModel.DataAnnotations.Schema;
+using System.ComponentModel.DataAnnotations;
+using System.Linq;
+using System.Web;
 
-namespace QT2247A2.Data
+namespace QT2247A2.Models
 {
-    [Table("Invoice")]
-    public class Invoice
+    public class InvoiceBaseViewModel
     {
-
-        #region Constructor
-
-        public Invoice()
-        {
-            InvoiceLines = new HashSet<InvoiceLine>();
-        }
-
-        #endregion
-
-        #region Columns
-
+        [Key]
         public int InvoiceId { get; set; }
 
+        [Display(Name="Customer")]
         public int CustomerId { get; set; }
 
+        [DataType(DataType.Date)]
+        [DisplayFormat(DataFormatString = "{0:MMM dd, yyyy}", ApplyFormatInEditMode = true)]
+        [Display(Name = "Date")]
         public DateTime InvoiceDate { get; set; }
 
         [StringLength(70)]
+        [Display(Name = "Billing Address")]
         public string BillingAddress { get; set; }
 
         [StringLength(40)]
+        [Display(Name = "City")]
         public string BillingCity { get; set; }
 
         [StringLength(40)]
+        [Display(Name = "State")]
         public string BillingState { get; set; }
 
         [StringLength(40)]
+        [Display(Name = "Country")]
         public string BillingCountry { get; set; }
 
         [StringLength(10)]
+        [Display(Name = "Postal/Zip")]
         public string BillingPostalCode { get; set; }
 
         [Column(TypeName = "numeric")]
+        [Display(Name = "Total")]
+        [DisplayFormat(DataFormatString = "{0:C}")]
         public decimal Total { get; set; }
-
-        #endregion 
-
-        #region Navigation Properties
-
-        public Customer Customer { get; set; }
-
-        #endregion
-
-        #region Entity Collections
-
-        public ICollection<InvoiceLine> InvoiceLines { get; set; }
-
-        #endregion
-
     }
 }

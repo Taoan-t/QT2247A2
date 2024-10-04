@@ -35,6 +35,9 @@ namespace QT2247A2.Controllers
                 // cfg.CreateMap<SourceType, DestinationType>();
                 // cfg.CreateMap<Product, ProductBaseViewModel>();
                 cfg.CreateMap<Track,TrackWithDetailViewModel>();
+                cfg.CreateMap<Invoice,InvoiceBaseViewModel>();
+                cfg.CreateMap<Invoice, InvoiceWithDetailViewModel>();
+                cfg.CreateMap<InvoiceLine, InvoiceLineBaseViewModel>();
             });
 
             mapper = config.CreateMapper();
@@ -95,6 +98,24 @@ namespace QT2247A2.Controllers
             var tracks = ds.Tracks.Include("Album").Include("Genre").OrderBy(t => t.Bytes).ThenBy(t => t.Name).Take(50);
 
             return mapper.Map<IEnumerable<Track>, IEnumerable<TrackWithDetailViewModel>>(tracks);
+        }
+
+        // ############################################################
+        // Invoice
+
+        // InvoiceGetAll() – Return a collection of InvoiceBaseViewModel classes sorted by InvoiceDate in descending order.
+        public IEnumerable<InvoiceBaseViewModel> InvoiceGetAll()
+        {
+            var invoices = ds.Invoices.OrderByDescending(t => t.InvoiceDate);
+            return mapper.Map<IEnumerable<Invoice>, IEnumerable<InvoiceBaseViewModel>>(invoices);
+        }
+
+        // InvoiceGetByIdWithDetail() – Return an InvoiceWithDetailViewModel for the Invoice with the specified ID.
+        public InvoiceWithDetailViewModel InvoiceGetByIdWithDetail(int id)
+        {
+            var invoice=ds.Invoices.Include("Customer.Employee").Include("InvoiceLines").SingleOrDefault(t=>t.InvoiceId== id);
+
+            return(invoice==null)?null:mapper.Map<Invoice,InvoiceWithDetailViewModel>(invoice);
         }
     }
 }

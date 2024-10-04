@@ -23,7 +23,7 @@ namespace QT2247A2.Data
 
         #region Navigation Properties
 
-        public Invoice Invoice { get; set; }
+        public Invoice Invoice { get; set; } 
 
         public Track Track { get; set; }
 

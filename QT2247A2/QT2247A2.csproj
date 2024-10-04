@@ -122,6 +122,7 @@
     <Compile Include="App_Start\FilterConfig.cs" />
     <Compile Include="App_Start\RouteConfig.cs" />
     <Compile Include="Controllers\HomeController.cs" />
+    <Compile Include="Controllers\InvoicesController.cs" />
     <Compile Include="Controllers\Manager.cs" />
     <Compile Include="Controllers\TracksController.cs" />
     <Compile Include="Data\Album.cs" />
@@ -140,6 +141,9 @@
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
+    <Compile Include="Models\InvoiceBaseViewModel.cs" />
+    <Compile Include="Models\InvoiceLineBaseViewModel.cs" />
+    <Compile Include="Models\InvoiceWithDetailViewModel.cs" />
     <Compile Include="Models\TrackBaseViewModel.cs" />
     <Compile Include="Models\TrackWithDetailViewModel.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
@@ -210,6 +214,8 @@
     <Content Include="Views\Home\Contact.cshtml" />
     <Content Include="Views\Home\Index.cshtml" />
     <Content Include="Views\Tracks\Index.cshtml" />
+    <Content Include="Views\Invoices\Index.cshtml" />
+    <Content Include="Views\Invoices\Details.cshtml" />
   </ItemGroup>
   <ItemGroup />
   <ItemGroup>
