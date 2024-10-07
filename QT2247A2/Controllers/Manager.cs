@@ -38,6 +38,7 @@ namespace QT2247A2.Controllers
                 cfg.CreateMap<Invoice,InvoiceBaseViewModel>();
                 cfg.CreateMap<Invoice, InvoiceWithDetailViewModel>();
                 cfg.CreateMap<InvoiceLine, InvoiceLineBaseViewModel>();
+                cfg.CreateMap<InvoiceLine,InvoiceLineWithDetailViewModel>();
             });
 
             mapper = config.CreateMapper();
@@ -88,7 +89,7 @@ namespace QT2247A2.Controllers
         public IEnumerable<TrackWithDetailViewModel> TrackGetTop50Longest()
         {
             var tracks=ds.Tracks.Include("Album").Include("Genre").OrderByDescending(t=>t.Milliseconds).ThenBy(t=>t.Name).Take(50);
-
+            
             return mapper.Map<IEnumerable<Track>, IEnumerable<TrackWithDetailViewModel>>(tracks);
         }
 
@@ -113,7 +114,7 @@ namespace QT2247A2.Controllers
         // InvoiceGetByIdWithDetail() – Return an InvoiceWithDetailViewModel for the Invoice with the specified ID.
         public InvoiceWithDetailViewModel InvoiceGetByIdWithDetail(int id)
         {
-            var invoice=ds.Invoices.Include("Customer.Employee").Include("InvoiceLines").SingleOrDefault(t=>t.InvoiceId== id);
+            var invoice=ds.Invoices.Include("Customer.Employee").Include("InvoiceLines").Include("InvoiceLines.Track").Include("InvoiceLines.Track.Album").Include("InvoiceLines.Track.Album.Artist").Include("InvoiceLines.Track.Genre").Include("InvoiceLines.Track.MediaType").SingleOrDefault(t=>t.InvoiceId== id);
 
             return(invoice==null)?null:mapper.Map<Invoice,InvoiceWithDetailViewModel>(invoice);
         }

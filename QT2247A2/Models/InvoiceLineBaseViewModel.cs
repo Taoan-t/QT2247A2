@@ -21,6 +21,7 @@ namespace QT2247A2.Models
         public int Quantity { get; set; }
 
         [Display(Name = "Line Total")]
+        [DisplayFormat(DataFormatString = "{0:C}")]
         public decimal LinePrice
         {
             get

@@ -143,6 +143,7 @@
     </Compile>
     <Compile Include="Models\InvoiceBaseViewModel.cs" />
     <Compile Include="Models\InvoiceLineBaseViewModel.cs" />
+    <Compile Include="Models\InvoiceLineWithDetailViewModel.cs" />
     <Compile Include="Models\InvoiceWithDetailViewModel.cs" />
     <Compile Include="Models\TrackBaseViewModel.cs" />
     <Compile Include="Models\TrackWithDetailViewModel.cs" />

@@ -4,7 +4,9 @@
         ViewBag.Title = "Index";
     }*@
 
-@{ string actionName = ViewContext.RouteData.GetRequiredString("action"); string title = "All Tracks";
+@{ string actionName = ViewContext.RouteData.GetRequiredString("action"); 
+
+    string title = "All Tracks";
     switch (actionName)
     {
         case "BluesJazz":
@@ -16,6 +18,7 @@
         case "Top50Smallest":
             title = "Smallest Tracks"; break;
     }
+
     ViewBag.Title = title;
 }
 

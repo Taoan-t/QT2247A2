@@ -9,7 +9,7 @@ namespace QT2247A2.Models
     {
         // Initial the navigation property in the default constructor
         public InvoiceWithDetailViewModel() {
-            InvoiceLines = new List<InvoiceLineBaseViewModel>();
+            InvoiceLines = new List<InvoiceLineWithDetailViewModel>();
         }
 
         public string CustomerFirstName { get; set; }
@@ -19,6 +19,6 @@ namespace QT2247A2.Models
         public string CustomerEmployeeFirstName { get; set; }
         public string CustomerEmployeeLastName { get; set; }
 
-        public IEnumerable<InvoiceLineBaseViewModel> InvoiceLines { get; set; }
+        public IEnumerable<InvoiceLineWithDetailViewModel> InvoiceLines { get; set; }
     }
 }
